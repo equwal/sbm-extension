@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="style.css">
+<title>sbm options</title>
+</head>
+<body class="options">
+<h1>sbm</h1>
+<p>sbm keeps your bookmarks as an sbm bookmark file in this browser. Sign in
+to sync the file with bm on your computers, the sbm app for Android and your
+other browsers.</p>
+
+<section id="signed-out">
+  <h2>Sign in to sync</h2>
+  <form id="sign-in">
+    <label>Sync server <input id="server" type="url" required></label>
+    <label>Email <input id="email" type="email" required autocomplete="email"></label>
+    <label>Password <input id="password" type="password" required autocomplete="current-password"></label>
+    <button>Sign in</button>
+  </form>
+  <p class="note">No account? <a id="signup" href="https://sbm.subread.space/signup" target="_blank" rel="noopener">Create one</a>
+  on the website of the server. The add-on sends your bookmarks only to this server, and only after you sign in.</p>
+</section>
+
+<section id="signed-in" hidden>
+  <h2>Sync</h2>
+  <p id="who"></p>
+  <button id="sync" type="button">Sync now</button>
+  <button id="sign-out" type="button">Sign out</button>
+  <p class="note"><a id="account" href="https://sbm.subread.space/account" target="_blank" rel="noopener">Your account</a></p>
+</section>
+
+<p id="message" role="status"></p>
+
+<footer>
+  <a href="https://github.com/equwal/sbm-extension" target="_blank" rel="noopener">Source code</a> ·
+  <a href="https://sbm.subread.space/privacy" target="_blank" rel="noopener">Privacy</a> ·
+  <a href="https://ko-fi.com/truex" target="_blank" rel="noopener">Support sbm on Ko-fi</a>
+</footer>
+<script src="lib/tsv.js"></script>
+<script src="options.js"></script>
+</body>
+</html>

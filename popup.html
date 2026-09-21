@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="style.css">
+<title>sbm</title>
+</head>
+<body class="popup">
+<input id="search" type="search" placeholder="Search, or type an address" autocomplete="off" autofocus>
+<ul id="list"></ul>
+<p id="empty" hidden></p>
+
+<form id="add" hidden>
+  <label>URL <input id="url" required></label>
+  <label>Description <input id="desc"></label>
+  <label>Tags, with spaces between them <input id="tags" autocomplete="off"></label>
+  <p id="known" class="note"></p>
+  <button id="save">Save</button> <button id="cancel" type="button">Cancel</button>
+</form>
+
+<footer>
+  <button id="add-page" type="button">Add this page</button>
+  <span id="status" class="note"></span>
+  <nav><a href="#" id="options">Options</a> · <a href="https://ko-fi.com/truex" target="_blank" rel="noopener">Support sbm on Ko-fi</a></nav>
+</footer>
+<script src="lib/tsv.js"></script>
+<script src="lib/fuzzy.js"></script>
+<script src="popup.js"></script>
+</body>
+</html>

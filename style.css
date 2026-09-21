@@ -1,0 +1,22 @@
+:root { color-scheme: light dark; --accent: #005577; --muted: #555; --line: #ddd; }
+@media (prefers-color-scheme: dark) { :root { --accent: #4fb3d9; --muted: #aaa; --line: #444; } }
+
+body { font: 14px/1.4 system-ui, sans-serif; margin: 0; }
+a { color: var(--accent); }
+.note { color: var(--muted); }
+input { font: inherit; box-sizing: border-box; width: 100%; padding: 6px; margin: 2px 0 8px; }
+button { font: inherit; padding: 4px 12px; }
+label { display: block; }
+
+.popup { width: 380px; padding: 8px; }
+.popup #list { list-style: none; margin: 0; padding: 0; max-height: 380px; overflow-y: auto; }
+.popup #list a { display: block; padding: 6px 4px; border-bottom: 1px solid var(--line); text-decoration: none; color: inherit; }
+.popup #list a:hover, .popup #list a:focus { background: color-mix(in srgb, var(--accent) 15%, transparent); }
+.popup #list small { color: var(--muted); }
+.popup footer { margin-top: 8px; display: flex; flex-direction: column; gap: 4px; }
+.popup nav { font-size: 12px; }
+
+.options { max-width: 36em; margin: 2em auto; padding: 0 1em; font-size: 15px; }
+.options h1 { color: var(--accent); }
+.options section { margin: 1.5em 0; }
+.options footer { margin-top: 3em; font-size: 13px; color: var(--muted); }
