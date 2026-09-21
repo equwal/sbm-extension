@@ -2,7 +2,7 @@
 
 Your [sbm](https://github.com/equwal/sbm) bookmarks in the browser.
 
-- **Search as you type** in the popup (Alt+Shift+B), with the fuzzy match of
+- **Search as you type** in the popup (Alt+Shift+M), with the fuzzy match of
   fzf. Enter opens the first match. Text that is no bookmark opens as an
   address, or as a web search, as in bm.
 - **Address bar:** type `bm`, a space, then words.
