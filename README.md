@@ -2,6 +2,10 @@
 
 Your [sbm](https://github.com/equwal/sbm) bookmarks in the browser.
 
+![bm adds a page in the terminal; the add-on shows it at once and adds another, which bm then shows](https://raw.githubusercontent.com/equwal/sbm-sync/master/demo/sbm-demo.gif)
+
+([MP4](https://github.com/equwal/sbm-sync/raw/master/demo/sbm-demo.mp4), 80 seconds.)
+
 - **Search as you type** in the popup (Alt+Shift+M), with the fuzzy match of
   fzf. Enter opens the first match. Text that is no bookmark opens as an
   address, or as a web search, as in bm.

@@ -83,6 +83,14 @@ $("options").addEventListener("click", (e) => {
   window.close();
 });
 
+/** The form takes the place of the list while it is open. */
+function showForm(on) {
+  for (const id of ["search", "list", "add-page"]) $(id).hidden = on;
+  $("add").hidden = !on;
+  if (on) $("empty").hidden = true;
+  else render();
+}
+
 $("add-page").addEventListener("click", async () => {
   const [tab] = await api.tabs.query({ active: true, currentWindow: true });
   $("url").value = tab && tab.url ? tab.url : "";
@@ -90,15 +98,11 @@ $("add-page").addEventListener("click", async () => {
   $("tags").value = "";
   const known = [...new Set(all.flatMap((b) => b.tags))].sort();
   $("known").textContent = known.length ? "Tags in your file: " + known.join(" ") : "";
-  $("add").hidden = false;
-  $("add-page").hidden = true;
+  showForm(true);
   $("tags").focus();
 });
 
-$("cancel").addEventListener("click", () => {
-  $("add").hidden = true;
-  $("add-page").hidden = false;
-});
+$("cancel").addEventListener("click", () => showForm(false));
 
 $("add").addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -109,11 +113,9 @@ $("add").addEventListener("submit", async (e) => {
   };
   try {
     const r = await send({ type: "add", bookmark });
-    $("status").textContent = r.existing ? "Already a bookmark: " + (r.existing.desc || r.existing.url) : "Bookmark added.";
-    $("add").hidden = true;
-    $("add-page").hidden = false;
+    showForm(false);
     await load();
-    if (r.existing) $("status").textContent = "Already a bookmark: " + (r.existing.desc || r.existing.url);
+    $("status").textContent = r.existing ? "Already a bookmark: " + (r.existing.desc || r.existing.url) : "Bookmark added.";
   } catch (err) {
     $("status").textContent = "Cannot add: " + err.message;
   }
