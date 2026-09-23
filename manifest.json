@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "sbm bookmarks",
   "short_name": "sbm",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Your sbm bookmarks in the browser: search as you type, add the page, sync with bm and the sbm app.",
   "homepage_url": "https://github.com/equwal/sbm-extension",
   "icons": {
@@ -39,6 +39,7 @@
     "scripts": [
       "lib/tsv.js",
       "lib/fuzzy.js",
+      "lib/plan.js",
       "background.js"
     ]
   },

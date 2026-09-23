@@ -20,9 +20,12 @@ sbm keeps your bookmarks in one plain text file: one bookmark per line, with the
 - Search as you type: press Alt+Shift+M or click the icon. The search is fuzzy, as in fzf. Enter opens the first match. Text that is no bookmark opens as an address, or as a web search.
 - In the address bar, type bm, a space, then words.
 - Add the page that you look at, with a description and tags.
-- Sync with bm on your computers, the sbm app for Android and your other browsers, through an sbm-sync server. The server is free software: use the default one, sbm.subread.space (paid after a free trial), or run your own.
+- Sync with bm on your computers, the sbm app for Android and your other browsers, through an sbm-sync server. The server is free software: use the default one, sbm.subread.space, or run your own. Sync on sbm.subread.space is free.
+- The options page shows the plan of your account and the paid options of the server, such as a supporter subscription. Stripe takes all payments on its own pages. The add-on never sees your card.
 
 Without an account, your bookmarks stay in the browser. The add-on has no ads, no analytics and no trackers.
+
+The operator of sbm.subread.space sells its paid options, not Google or Mozilla. Terms of sale, with the refund policy: https://sbm.subread.space/terms
 
 Source code (AGPL-3.0): https://github.com/equwal/sbm-extension
 
@@ -33,6 +36,8 @@ Source code (AGPL-3.0): https://github.com/equwal/sbm-extension
 **Homepage:** https://github.com/equwal/sbm-extension
 **Support:** https://github.com/equwal/sbm-extension/issues
 **Privacy policy:** https://sbm.subread.space/privacy
+**Terms of sale:** https://sbm.subread.space/terms (in the description; the
+Chrome Web Store asks for them when an add-on leads to payments)
 
 ## Chrome Web Store (chrome.google.com/webstore/devconsole)
 
@@ -50,7 +55,9 @@ Source code (AGPL-3.0): https://github.com/equwal/sbm-extension
   information (the password, sent once to get a token) and web history (the
   addresses of the bookmarks). Tick the three statements: not sold, not used
   for purposes unrelated to the single purpose, not used for credit.
-- Distribution: public, all regions. Free.
+- Distribution: public, all regions. Free. If the Distribution tab has the
+  option "Contains in-app purchases", tick it: the options page leads to
+  Stripe subscriptions of the server.
 
 ## addons.mozilla.org (addons.mozilla.org/developers)
 
@@ -58,7 +65,12 @@ Source code (AGPL-3.0): https://github.com/equwal/sbm-extension
 - Categories: Bookmarks, Search Tools.
 - License: GNU Affero General Public License v3.0.
 - Contributions URL (in "Manage Status & Versions", then "Edit Product
-  Page"): https://ko-fi.com/truex
+  Page"): https://ko-fi.com/truex. AMO accepts only some sites here:
+  ko-fi.com is one, buy.stripe.com is not.
+- "This add-on requires payment, non-free services or software, or
+  additional hardware": leave it clear while sync is free. Tick it on the
+  day that sync on sbm.subread.space needs payment, and change the
+  description the same day.
 - Data collection: the manifest declares none as required, and bookmarks,
   personally identifying information and authentication information as
   optional. Firefox asks the user at sign-in.

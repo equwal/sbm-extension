@@ -19,4 +19,5 @@ label { display: block; }
 .options { max-width: 36em; margin: 2em auto; padding: 0 1em; font-size: 15px; }
 .options h1 { color: var(--accent); }
 .options section { margin: 1.5em 0; }
+.options #billing button { margin: 0 6px 6px 0; }
 .options footer { margin-top: 3em; font-size: 13px; color: var(--muted); }

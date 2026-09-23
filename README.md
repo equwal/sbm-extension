@@ -25,9 +25,16 @@ The bookmarks are an sbm file: one bookmark per line,
 ## Sync
 
 The add-on uses https://sbm.subread.space unless you give another server in
-the options. Create an account there: it is free for 30 days, then $3 a month
-or $30 a year. Or [run your own server](https://github.com/equwal/sbm-sync):
-it is free software.
+the options. Create an account there. Sync on that server is free. Or
+[run your own server](https://github.com/equwal/sbm-sync): it is free
+software.
+
+The options page shows the plan of your account and the payments that the
+server offers. When the server has billing, subscribe there, and use
+"Manage billing" to change the card or cancel. The page also links to the
+other payment pages of the server, such as a supporter subscription and the
+page to cancel it, and to the terms of sale. Stripe takes all payments, on
+its own pages in a new tab. The add-on never sees your card.
 
 ## Permissions
 

@@ -7,7 +7,7 @@
 
 // Chrome runs this file as a service worker; Firefox loads the libraries
 // through the manifest.
-if (typeof importScripts === "function") importScripts("lib/tsv.js", "lib/fuzzy.js");
+if (typeof importScripts === "function") importScripts("lib/tsv.js", "lib/fuzzy.js", "lib/plan.js");
 
 const api = globalThis.browser ?? globalThis.chrome;
 const DEFAULT_SERVER = "https://sbm.subread.space";
@@ -84,6 +84,33 @@ async function signOut() {
   return state();
 }
 
+/** The plan of the account and the payments that the server offers, or null. */
+async function account() {
+  const s = await state();
+  if (!s.token) return null;
+  const r = await fetch(s.server + "/api/account", { headers: { Authorization: "Bearer " + s.token } });
+  // A server from before this API has no such address. Its account page
+  // has the payments.
+  if (r.status === 404) return null;
+  if (!r.ok) throw new Error((await r.text()).trim() || "The server answered " + r.status + ".");
+  return r.json();
+}
+
+/** Ask the server for a page of Stripe, and open that page in a new tab. */
+async function billing(path, form) {
+  const s = await state();
+  const r = await fetch(s.server + path, {
+    method: "POST",
+    headers: { Authorization: "Bearer " + s.token, "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams(form),
+  });
+  const body = (await r.text()).trim();
+  if (!r.ok) throw new Error(body || "The server answered " + r.status + ".");
+  const url = Plan.web(body, ["https:"]);
+  if (!url) throw new Error("The server gave no https address.");
+  await api.tabs.create({ url });
+}
+
 /** Add a bookmark at the end of the file. With the same page there already, return that bookmark. */
 async function add(b) {
   const s = await state();
@@ -100,6 +127,9 @@ api.runtime.onMessage.addListener((msg, sender, reply) => {
     signIn: () => signIn(msg.server, msg.email, msg.password),
     signOut: () => signOut(),
     add: () => add(msg.bookmark),
+    account: () => account(),
+    checkout: () => billing("/api/checkout", { plan: msg.plan }),
+    portal: () => billing("/api/portal", {}),
   };
   const job = jobs[msg.type];
   if (!job) return false;
