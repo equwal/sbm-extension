@@ -56,8 +56,13 @@ The add-on needs no build: load this directory as an unpacked extension
 
     npm install
     npm test          # property tests of the file format and the search
-    npm run lint      # the checks of addons.mozilla.org
-    npm run build     # the zip for the stores, in web-ext-artifacts/
+    npm run lint      # the checks of addons.mozilla.org, on the Firefox package
+    npm run build     # the zip for the Chrome Web Store, in web-ext-artifacts/
+    npm run build:firefox  # the zip for addons.mozilla.org
+
+The two zips have the same files. Only the manifest.json of the Firefox zip
+has no `background.service_worker`: Firefox ignores it and warns about it,
+and Chrome needs it.
 
 ## License
 

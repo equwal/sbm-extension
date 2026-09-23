@@ -1,8 +1,12 @@
 # Store listings: Chrome Web Store and addons.mozilla.org
 
-Package: `npm run build` makes `web-ext-artifacts/sbm_bookmarks-<version>.zip`.
-Upload the same zip to both stores. It has no build step and no minified
-code, so no separate source upload is necessary.
+Packages: `npm run build` makes `web-ext-artifacts/sbm_bookmarks-<version>.zip`
+for the Chrome Web Store. `npm run build:firefox` makes
+`web-ext-artifacts/sbm_bookmarks-<version>-firefox.zip` for
+addons.mozilla.org. The two zips have the same files. Only the manifest.json
+of the Firefox zip has no `background.service_worker`, which Firefox ignores
+and warns about. Neither zip has a build step or minified code, so no
+separate source upload is necessary.
 
 The declarations are yours: read each answer before you submit it.
 
@@ -74,8 +78,21 @@ Chrome Web Store asks for them when an add-on leads to payments)
 - Data collection: the manifest declares none as required, and bookmarks,
   personally identifying information and authentication information as
   optional. Firefox asks the user at sign-in.
-- Notes to reviewer: "No build step: the zip is the source. To test sync,
-  open the options, keep the server https://sbm.subread.space and sign in
-  with the review account below." Give the account from
-  `Desktop\sbm-android-signing\play-review-account.txt` (it holds demo
-  bookmarks only).
+- Upload `sbm_bookmarks-<version>-firefox.zip`. Compatible: Firefox and
+  Firefox for Android.
+- Version notes (0.2.0): "The options page has a new section, Plan. It
+  shows the plan of your sync account and its payment options: subscribe,
+  manage billing, become a supporter, and the terms of sale. Stripe takes all
+  payments on its own pages, in a new tab. The add-on never sees your card.
+  Sync on sbm.subread.space stays free. The add-on also has fuzzy search as
+  you type (Alt+Shift+M), the address bar keyword bm, Add this page with
+  tags, and sync with bm and the sbm app for Android."
+- Notes to reviewer: "No build step: the zip is the source code of
+  https://github.com/equwal/sbm-extension at tag v0.2.0. Only manifest.json
+  is different: it has no background.service_worker, which only Chrome uses.
+  To test sync, open the options page, keep the server
+  https://sbm.subread.space, and sign in with the review account below. The
+  account holds demo bookmarks only. After the sign-in, the Plan section
+  shows "Sync is on." and the payment links of the server. Sync is free, so
+  no payment is necessary for the test." Then add the email and the password
+  from `Desktop\sbm-android-signing\play-review-account.txt`.

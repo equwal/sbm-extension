@@ -5,8 +5,9 @@
   "license": "AGPL-3.0-only",
   "scripts": {
     "test": "node --test test/*.test.js",
-    "lint": "npx --yes web-ext lint --self-hosted=false",
-    "build": "npx --yes web-ext build"
+    "lint": "node firefox.mjs && npx --yes web-ext lint --self-hosted=false --source-dir build/firefox",
+    "build": "npx --yes web-ext build",
+    "build:firefox": "node firefox.mjs && npx --yes web-ext build --source-dir build/firefox --filename sbm_bookmarks-{version}-firefox.zip"
   },
   "devDependencies": {
     "fast-check": "^4.3.0"

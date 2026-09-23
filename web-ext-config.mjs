@@ -2,6 +2,8 @@
 // only, not its tests and tools.
 export default {
   ignoreFiles: [
+    "build",
+    "firefox.mjs",
     "test",
     "icons/make-icons.ps1",
     "package.json",
