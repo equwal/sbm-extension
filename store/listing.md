@@ -21,7 +21,8 @@ Your sbm bookmarks in the browser: search as you type, add the page, sync with b
 
 sbm keeps your bookmarks in one plain text file: one bookmark per line, with the address, a description and tags. This add-on brings that file to your browser.
 
-- Search as you type: press Alt+Shift+M or click the icon. The search is fuzzy, as in fzf. Enter opens the first match. Text that is no bookmark opens as an address, or as a web search.
+- Search as you type: press Alt+Shift+M or click the icon. The search is fuzzy, as in fzf. Enter opens the highlighted match. Text that is no bookmark opens as an address, or as a web search.
+- Live preview: the page of the highlighted bookmark shows beside the list while you search. Move the highlight with the arrow keys or the mouse. Some sites do not let other pages show them. Turn the preview off in the options.
 - In the address bar, type bm, a space, then words.
 - Add the page that you look at, with a description and tags.
 - Sync with bm on your computers, the sbm app for Android and your other browsers, through an sbm-sync server. The server is free software: use the default one, sbmsync.com, or run your own. Sync on sbmsync.com is free.

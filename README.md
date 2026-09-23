@@ -7,8 +7,12 @@ Your [sbm](https://github.com/equwal/sbm) bookmarks in the browser.
 ([MP4](https://github.com/equwal/sbm-sync/raw/master/demo/sbm-demo.mp4), 80 seconds.)
 
 - **Search as you type** in the popup (Alt+Shift+M), with the fuzzy match of
-  fzf. Enter opens the first match. Text that is no bookmark opens as an
-  address, or as a web search, as in bm.
+  fzf. Enter opens the highlighted match, first the top one. Text that is no
+  bookmark opens as an address, or as a web search, as in bm.
+- **Live preview:** the page of the highlighted bookmark shows beside the
+  list while you search. The arrow keys and the mouse move the highlight.
+  An http page shows with https. Some sites do not let other pages show
+  them, so their preview stays empty. Turn the preview off in the options.
 - **Address bar:** type `bm`, a space, then words.
 - **Add this page** with a description and tags.
 - **Sync** with bm on your computers, the
@@ -50,13 +54,16 @@ your email address and your password to the server. The
 [privacy policy](https://sbmsync.com/privacy) tells what the server
 keeps.
 
+The live preview needs no permission. It loads the page from its site, as
+a visit does, without a referrer. It sends nothing to the sync server.
+
 ## Develop
 
 The add-on needs no build: load this directory as an unpacked extension
 (Chrome: chrome://extensions, developer mode; Firefox: about:debugging).
 
     npm install
-    npm test          # property tests of the file format and the search
+    npm test          # property tests of the file format, the search and the preview
     npm run lint      # the checks of addons.mozilla.org, on the Firefox package
     npm run build     # the zip for the Chrome Web Store, in web-ext-artifacts/
     npm run build:firefox  # the zip for addons.mozilla.org
