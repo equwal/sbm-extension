@@ -24,7 +24,7 @@ The bookmarks are an sbm file: one bookmark per line,
 
 ## Sync
 
-The add-on uses https://sbm.subread.space unless you give another server in
+The add-on uses https://sbmsync.com unless you give another server in
 the options. Create an account there. Sync on that server is free. Or
 [run your own server](https://github.com/equwal/sbm-sync): it is free
 software.
@@ -42,11 +42,12 @@ its own pages in a new tab. The add-on never sees your card.
 - `activeTab`: read the address and the title of the page when you click
   "Add this page".
 - `alarms`: sync every 30 minutes.
-- Access to sbm.subread.space, or to the server that you choose: sync.
+- Access to sbmsync.com and its old address sbm.subread.space, or to the
+  server that you choose: sync.
 
 Firefox also asks you, at sign-in, to let the add-on send your bookmarks,
 your email address and your password to the server. The
-[privacy policy](https://sbm.subread.space/privacy) tells what the server
+[privacy policy](https://sbmsync.com/privacy) tells what the server
 keeps.
 
 ## Develop

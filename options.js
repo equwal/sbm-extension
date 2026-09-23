@@ -4,7 +4,7 @@
 
 const api = globalThis.browser ?? globalThis.chrome;
 const $ = (id) => document.getElementById(id);
-const DEFAULT_SERVER = "https://sbm.subread.space";
+const DEFAULT_SERVER = "https://sbmsync.com";
 
 // The data that the add-on sends to the server after a sign-in. Firefox 140
 // and later ask the user for it; other browsers have no such question.

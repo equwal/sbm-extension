@@ -24,12 +24,12 @@ sbm keeps your bookmarks in one plain text file: one bookmark per line, with the
 - Search as you type: press Alt+Shift+M or click the icon. The search is fuzzy, as in fzf. Enter opens the first match. Text that is no bookmark opens as an address, or as a web search.
 - In the address bar, type bm, a space, then words.
 - Add the page that you look at, with a description and tags.
-- Sync with bm on your computers, the sbm app for Android and your other browsers, through an sbm-sync server. The server is free software: use the default one, sbm.subread.space, or run your own. Sync on sbm.subread.space is free.
+- Sync with bm on your computers, the sbm app for Android and your other browsers, through an sbm-sync server. The server is free software: use the default one, sbmsync.com, or run your own. Sync on sbmsync.com is free.
 - The options page shows the plan of your account and the paid options of the server, such as a supporter subscription. Stripe takes all payments on its own pages. The add-on never sees your card.
 
 Without an account, your bookmarks stay in the browser. The add-on has no ads, no analytics and no trackers.
 
-The operator of sbm.subread.space sells its paid options, not Google or Mozilla. Terms of sale, with the refund policy: https://sbm.subread.space/terms
+The operator of sbmsync.com sells its paid options, not Google or Mozilla. Terms of sale, with the refund policy: https://sbmsync.com/terms
 
 Source code (AGPL-3.0): https://github.com/equwal/sbm-extension
 
@@ -39,8 +39,8 @@ Source code (AGPL-3.0): https://github.com/equwal/sbm-extension
 
 **Homepage:** https://github.com/equwal/sbm-extension
 **Support:** https://github.com/equwal/sbm-extension/issues
-**Privacy policy:** https://sbm.subread.space/privacy
-**Terms of sale:** https://sbm.subread.space/terms (in the description; the
+**Privacy policy:** https://sbmsync.com/privacy
+**Terms of sale:** https://sbmsync.com/terms (in the description; the
 Chrome Web Store asks for them when an add-on leads to payments)
 
 ## Chrome Web Store (chrome.google.com/webstore/devconsole)
@@ -51,7 +51,7 @@ Chrome Web Store asks for them when an add-on leads to payments)
   - storage: keeps the bookmarks of the user and the sign-in token in the browser.
   - activeTab: reads the address and the title of the current page when the user clicks "Add this page".
   - alarms: syncs the bookmarks every 30 minutes.
-  - Host permission sbm.subread.space: sends the bookmark file to the default sync server after the user signs in.
+  - Host permissions sbmsync.com and sbm.subread.space (the old address of the same server): send the bookmark file to the default sync server after the user signs in.
   - Optional host permissions (https://\*/\*, http://\*/\*): the user can choose another sync server; at sign-in the add-on asks for that one site only.
 - **Remote code:** No. All code is in the package.
 - **Data usage:** the add-on collects, only after the user signs in:
@@ -73,7 +73,7 @@ Chrome Web Store asks for them when an add-on leads to payments)
   ko-fi.com is one, buy.stripe.com is not.
 - "This add-on requires payment, non-free services or software, or
   additional hardware": leave it clear while sync is free. Tick it on the
-  day that sync on sbm.subread.space needs payment, and change the
+  day that sync on sbmsync.com needs payment, and change the
   description the same day.
 - Data collection: the manifest declares none as required, and bookmarks,
   personally identifying information and authentication information as
@@ -84,14 +84,14 @@ Chrome Web Store asks for them when an add-on leads to payments)
   shows the plan of your sync account and its payment options: subscribe,
   manage billing, become a supporter, and the terms of sale. Stripe takes all
   payments on its own pages, in a new tab. The add-on never sees your card.
-  Sync on sbm.subread.space stays free. The add-on also has fuzzy search as
+  Sync on sbmsync.com stays free. The add-on also has fuzzy search as
   you type (Alt+Shift+M), the address bar keyword bm, Add this page with
   tags, and sync with bm and the sbm app for Android."
 - Notes to reviewer: "No build step: the zip is the source code of
   https://github.com/equwal/sbm-extension at tag v0.2.0. Only manifest.json
   is different: it has no background.service_worker, which only Chrome uses.
   To test sync, open the options page, keep the server
-  https://sbm.subread.space, and sign in with the review account below. The
+  https://sbmsync.com, and sign in with the review account below. The
   account holds demo bookmarks only. After the sign-in, the Plan section
   shows "Sync is on." and the payment links of the server. Sync is free, so
   no payment is necessary for the test." Then add the email and the password

@@ -10,7 +10,7 @@
 if (typeof importScripts === "function") importScripts("lib/tsv.js", "lib/fuzzy.js", "lib/plan.js");
 
 const api = globalThis.browser ?? globalThis.chrome;
-const DEFAULT_SERVER = "https://sbm.subread.space";
+const DEFAULT_SERVER = "https://sbmsync.com";
 const SYNC_MINUTES = 30;
 
 // One change at a time: each job starts when the one before it ends.
