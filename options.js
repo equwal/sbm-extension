@@ -150,10 +150,4 @@ $("sign-out").addEventListener("click", async () => {
   show();
 });
 
-// The preview in the popup is on until the user turns it off.
-api.storage.local.get("preview").then((s) => {
-  $("preview").checked = s.preview !== false;
-});
-$("preview").addEventListener("change", () => api.storage.local.set({ preview: $("preview").checked }));
-
 show();

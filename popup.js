@@ -1,21 +1,11 @@
 // The popup: search as you type, Enter or a click opens, "Add this page" adds.
-// The page of the highlighted bookmark shows live in a preview beside the list.
 "use strict";
 
 const api = globalThis.browser ?? globalThis.chrome;
 const $ = (id) => document.getElementById(id);
 const MAX_ROWS = 50;
-// The preview loads a page only after the highlight stays on it this long
-// (ms), so that fast typing does not load a page for each letter.
-const PREVIEW_WAIT = 300;
 let all = []; // newest first, as bm adds at the end
 let shown = [];
-let sel = 0; // the highlighted row: Enter opens it
-let preview = true; // the options can turn the preview off
-let started = false; // the preview starts when the user types or points at a bookmark
-let framed = null; // the address in the frame
-let timer;
-let pointer = ""; // where the mouse was last
 
 function send(msg) {
   return api.runtime.sendMessage(msg).then((r) => {
@@ -39,12 +29,11 @@ function showStatus(s) {
   $("status").textContent = text;
 }
 
-/** Show the bookmarks that match the search. The highlight goes to the row of keep, or else to the first row. */
-function render(keep) {
+function render() {
   shown = Fuzzy.filter(all, $("search").value, (b) => b.desc + " " + b.tags.join(" ") + " " + b.url);
   const list = $("list");
   list.replaceChildren();
-  shown.slice(0, MAX_ROWS).forEach((b, i) => {
+  for (const b of shown.slice(0, MAX_ROWS)) {
     const li = document.createElement("li");
     const a = document.createElement("a");
     a.href = b.url;
@@ -56,76 +45,19 @@ function render(keep) {
       e.preventDefault();
       open(b.url, e.ctrlKey || e.metaKey || e.button === 1);
     });
-    a.addEventListener("mousemove", (e) => {
-      // The browser also sends mousemove when the list moves under a mouse
-      // that stays still. Only a move of the mouse moves the highlight.
-      const at = e.screenX + "," + e.screenY;
-      if (at === pointer) return;
-      pointer = at;
-      point(i);
-    });
-    a.addEventListener("focus", () => point(i));
     li.append(a);
     list.append(li);
-  });
+  }
   const empty = $("empty");
   empty.hidden = shown.length > 0;
   empty.textContent = all.length === 0 ? "No bookmarks yet. Sign in to sync in the options, or add this page."
     : "No bookmark matches. Press Enter to search the web.";
-  const again = keep ? shown.findIndex((b) => b.url === keep.url) : -1;
-  highlight(again >= 0 && again < MAX_ROWS ? again : 0);
-}
-
-/** The user points at row i: with the mouse, the Tab key or the arrow keys. */
-function point(i) {
-  started = true;
-  highlight(i);
-}
-
-/** Highlight row i, and show its page in the preview. */
-function highlight(i) {
-  const rows = $("list").children;
-  sel = Preview.move(i, 0, rows.length);
-  for (let j = 0; j < rows.length; j++) rows[j].classList.toggle("sel", j === sel);
-  if (started) showPage(rows.length > 0 ? shown[sel] : undefined);
-}
-
-/** Show the page of bookmark b in the preview, when the highlight stays on it. */
-function showPage(b) {
-  clearTimeout(timer);
-  if (!preview) return;
-  const address = b ? Preview.address(b.url) : null;
-  $("caption").textContent = !b ? "No bookmark to preview."
-    : address ? address : "No preview: " + b.url + " is not a web page.";
-  if (address) timer = setTimeout(() => frame(address), PREVIEW_WAIT);
-  else frame(null);
-}
-
-/** Load address in the frame, or an empty page for null. */
-function frame(address) {
-  if (address === framed) return;
-  framed = address;
-  $("frame").src = address || "about:blank";
-}
-
-/**
- * Show or hide the preview. On a computer it goes beside the list. On
- * Android the popup fills the narrow screen, so it goes under the search.
- */
-function showPreview(on) {
-  const android = /Android/.test(navigator.userAgent);
-  $("preview").hidden = !on;
-  document.body.classList.toggle("wide", on && !android);
-  document.body.classList.toggle("stack", on && android);
-  if (!on) frame(null);
 }
 
 async function load() {
-  const s = await api.storage.local.get(["text", "token", "synced", "error", "preview"]);
+  const s = await api.storage.local.get(["text", "token", "synced", "error"]);
   all = Tsv.parse(s.text || "").reverse();
-  preview = s.preview !== false;
-  showPreview(preview && $("add").hidden);
-  render(shown[sel]);
+  render();
   showStatus(s);
   return s;
 }
@@ -137,31 +69,13 @@ function open(url, newTab) {
   window.close();
 }
 
-$("search").addEventListener("input", () => {
-  started = true;
-  render();
-});
+$("search").addEventListener("input", render);
 $("search").addEventListener("keydown", (e) => {
-  if (e.key === "ArrowDown" || e.key === "ArrowUp") {
-    e.preventDefault();
-    point(sel + (e.key === "ArrowDown" ? 1 : -1));
-    const row = $("list").children[sel];
-    if (row) row.scrollIntoView({ block: "nearest" });
-    return;
-  }
   if (e.key !== "Enter") return;
   const text = $("search").value;
-  if (shown.length > 0) open(shown[sel].url, e.ctrlKey || e.metaKey);
+  if (shown.length > 0) open(shown[0].url, e.ctrlKey || e.metaKey);
   else if (text.trim() !== "") open(Tsv.target(text), e.ctrlKey || e.metaKey);
 });
-
-// A page in the preview can take the focus with a script, and then the
-// typing goes into that page. The preview is only to look at, so the focus
-// goes back to the search at once. The mouse wheel and clicks on links still
-// work in the preview.
-window.addEventListener("blur", () => setTimeout(() => {
-  if (document.activeElement === $("frame") && !$("search").hidden) $("search").focus();
-}));
 
 $("options").addEventListener("click", (e) => {
   e.preventDefault();
@@ -169,11 +83,10 @@ $("options").addEventListener("click", (e) => {
   window.close();
 });
 
-/** The form takes the place of the list and the preview while it is open. */
+/** The form takes the place of the list while it is open. */
 function showForm(on) {
   for (const id of ["search", "list", "add-page"]) $(id).hidden = on;
   $("add").hidden = !on;
-  showPreview(preview && !on);
   if (on) $("empty").hidden = true;
   else render();
 }
@@ -209,7 +122,7 @@ $("add").addEventListener("submit", async (e) => {
 });
 
 api.storage.onChanged.addListener((changes, area) => {
-  if (area === "local" && (changes.text || changes.synced || changes.error || changes.preview)) load();
+  if (area === "local" && (changes.text || changes.synced || changes.error)) load();
 });
 
 load().then((s) => {

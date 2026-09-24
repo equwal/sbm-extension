@@ -7,30 +7,14 @@ a { color: var(--accent); }
 input { font: inherit; box-sizing: border-box; width: 100%; padding: 6px; margin: 2px 0 8px; }
 button { font: inherit; padding: 4px 12px; }
 label { display: block; }
-label.check input { width: auto; margin: 0 6px 0 0; }
 
 .popup { width: 380px; padding: 8px; }
 .popup #list { list-style: none; margin: 0; padding: 0; max-height: 380px; overflow-y: auto; }
 .popup #list a { display: block; padding: 6px 4px; border-bottom: 1px solid var(--line); text-decoration: none; color: inherit; }
 .popup #list a:hover, .popup #list a:focus { background: color-mix(in srgb, var(--accent) 15%, transparent); }
 .popup #list small { color: var(--muted); }
-.popup #list .sel a { background: color-mix(in srgb, var(--accent) 15%, transparent); }
 .popup footer { margin-top: 8px; display: flex; flex-direction: column; gap: 4px; }
 .popup nav { font-size: 12px; }
-
-/* The preview of the highlighted page: beside the list on a computer, under
-   the search on Android. The frame is white, as a browser shows a page. */
-.popup #preview[hidden] { display: none; }
-.popup #caption { margin: 0 0 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.popup #frame { flex: 1; width: 100%; box-sizing: border-box; border: 1px solid var(--line); background: #fff; }
-.popup.wide { width: 780px; display: grid; grid-template-columns: 380px minmax(0, 1fr); column-gap: 12px; align-items: start; }
-.popup.wide > * { grid-column: 1; }
-.popup.wide #preview { grid-column: 2; grid-row: 1 / span 5; align-self: stretch; display: flex; flex-direction: column; }
-.popup.wide #frame { min-height: 460px; }
-.popup.stack { width: auto; display: flex; flex-direction: column; }
-.popup.stack #search { order: -2; }
-.popup.stack #preview { order: -1; margin-bottom: 8px; }
-.popup.stack #frame { height: 50vh; }
 
 .options { max-width: 36em; margin: 2em auto; padding: 0 1em; font-size: 15px; }
 .options h1 { color: var(--accent); }
