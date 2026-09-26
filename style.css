@@ -20,4 +20,5 @@ label { display: block; }
 .options h1 { color: var(--accent); }
 .options section { margin: 1.5em 0; }
 .options #billing button { margin: 0 6px 6px 0; }
+.options #more-apps li { margin-bottom: 6px; color: var(--muted); }
 .options footer { margin-top: 3em; font-size: 13px; color: var(--muted); }
